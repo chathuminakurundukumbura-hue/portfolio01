@@ -49,15 +49,17 @@ body.dark {
 .bg-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px) saturate(120%);
-  opacity: 0.65;
+  /* stronger, crisper blobs for better visibility */
+  filter: blur(40px) saturate(160%);
+  opacity: 0.9;
+  mix-blend-mode: screen;
   transform: translate3d(0,0,0);
 }
 
-.bg-blob.b1 { width: 520px; height: 520px; left: -10%; top: -8%; background: radial-gradient(circle at 30% 30%, rgba(196,30,58,0.18), rgba(196,30,58,0.06) 40%, transparent 60%); animation: move1 18s linear infinite; }
-.bg-blob.b2 { width: 420px; height: 420px; right: -8%; top: 10%; background: radial-gradient(circle at 70% 70%, rgba(122,162,255,0.14), rgba(122,162,255,0.04) 40%, transparent 60%); animation: move2 20s linear infinite; }
-.bg-blob.b3 { width: 720px; height: 720px; left: 10%; bottom: -20%; background: radial-gradient(circle at 40% 60%, rgba(214,54,82,0.08), rgba(214,54,82,0.02) 40%, transparent 60%); animation: move3 26s linear infinite; }
-.bg-blob.b4 { width: 360px; height: 360px; right: 20%; bottom: -6%; background: radial-gradient(circle at 60% 30%, rgba(58,196,160,0.08), rgba(58,196,160,0.02) 40%, transparent 60%); animation: move4 22s linear infinite; }
+.bg-blob.b1 { width: 520px; height: 520px; left: -10%; top: -8%; background: radial-gradient(circle at 30% 30%, rgba(196,30,58,0.30), rgba(196,30,58,0.18) 40%, rgba(196,30,58,0.06) 60%); animation: move1 18s ease-in-out infinite; }
+.bg-blob.b2 { width: 420px; height: 420px; right: -8%; top: 10%; background: radial-gradient(circle at 70% 70%, rgba(122,162,255,0.28), rgba(122,162,255,0.12) 40%, rgba(122,162,255,0.04) 60%); animation: move2 20s ease-in-out infinite; }
+.bg-blob.b3 { width: 720px; height: 720px; left: 10%; bottom: -20%; background: radial-gradient(circle at 40% 60%, rgba(214,54,82,0.20), rgba(214,54,82,0.06) 40%, rgba(214,54,82,0.02) 60%); animation: move3 26s ease-in-out infinite; }
+.bg-blob.b4 { width: 360px; height: 360px; right: 20%; bottom: -6%; background: radial-gradient(circle at 60% 30%, rgba(58,196,160,0.20), rgba(58,196,160,0.06) 40%, rgba(58,196,160,0.02) 60%); animation: move4 22s ease-in-out infinite; }
 
 @keyframes move1 {
   0% { transform: translate3d(0,0,0) scale(1); }
@@ -85,18 +87,18 @@ body.dark {
   content: '';
   position: absolute;
   inset: 0;
-  background: conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.02), rgba(0,0,0,0.02), rgba(255,255,255,0.02));
+  background: conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.03), rgba(0,0,0,0.02), rgba(255,255,255,0.03));
   mix-blend-mode: overlay;
-  opacity: 0.6;
-  animation: spin 60s linear infinite;
+  opacity: 0.85;
+  animation: spin 80s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* Dark mode color adjustments for blobs */
-body.dark .bg-blob.b1 { background: radial-gradient(circle at 30% 30%, rgba(122,162,255,0.12), rgba(122,162,255,0.04) 40%, transparent 60%); }
-body.dark .bg-blob.b2 { background: radial-gradient(circle at 70% 70%, rgba(214,54,82,0.10), rgba(214,54,82,0.02) 40%, transparent 60%); }
-body.dark .bg-blob.b3 { background: radial-gradient(circle at 40% 60%, rgba(96,255,200,0.08), rgba(96,255,200,0.02) 40%, transparent 60%); }
-body.dark .bg-blob.b4 { background: radial-gradient(circle at 60% 30%, rgba(255,180,120,0.06), rgba(255,180,120,0.02) 40%, transparent 60%); }
+body.dark .bg-blob.b1 { background: radial-gradient(circle at 30% 30%, rgba(122,162,255,0.32), rgba(122,162,255,0.18) 40%, rgba(122,162,255,0.06) 60%); }
+body.dark .bg-blob.b2 { background: radial-gradient(circle at 70% 70%, rgba(214,54,82,0.26), rgba(214,54,82,0.10) 40%, rgba(214,54,82,0.03) 60%); }
+body.dark .bg-blob.b3 { background: radial-gradient(circle at 40% 60%, rgba(96,255,200,0.20), rgba(96,255,200,0.06) 40%, rgba(96,255,200,0.02) 60%); }
+body.dark .bg-blob.b4 { background: radial-gradient(circle at 60% 30%, rgba(255,180,120,0.18), rgba(255,180,120,0.06) 40%, rgba(255,180,120,0.02) 60%); }
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
@@ -195,6 +197,8 @@ body {
   font-weight: 700;
   color: var(--primary-color);
   letter-spacing: 1px;
+  text-decoration: none;
+  font-style: italic;
 }
 
 .nav-links {
