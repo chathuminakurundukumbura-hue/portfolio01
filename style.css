@@ -37,6 +37,50 @@ body.dark {
   --shadow-lg: 0 14px 40px rgba(0,0,0,0.7);
 }
 
+/* Dark-mode component overrides for better contrast and readability */
+body.dark .card,
+body.dark .project-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+body.dark .contact-form,
+body.dark .section.contact .contact-form {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: none;
+}
+
+body.dark .card h3,
+body.dark .card p,
+body.dark .project-content h3,
+body.dark .project-content p {
+  color: var(--text-dark);
+}
+
+body.dark .image-placeholder {
+  background: linear-gradient(135deg, rgba(122,162,255,0.12) 0%, rgba(153,191,255,0.06) 100%);
+}
+
+body.dark .image-placeholder::before {
+  border-color: rgba(122,162,255,0.18);
+}
+
+body.dark .project-image {
+  background: linear-gradient(135deg, rgba(122,162,255,0.08) 0%, rgba(153,191,255,0.04) 100%);
+}
+
+body.dark .project-placeholder,
+body.dark .initials {
+  color: var(--text-white);
+}
+
+body.dark .footer-bottom p,
+body.dark .footer-col p {
+  color: var(--text-light);
+}
+
 html {
   scroll-behavior: smooth;
 }
