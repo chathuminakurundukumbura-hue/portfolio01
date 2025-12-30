@@ -37,6 +37,72 @@ body.dark {
   --shadow-lg: 0 14px 40px rgba(0,0,0,0.7);
 }
 
+/* Animated background blobs */
+.bg-anim {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px) saturate(120%);
+  opacity: 0.65;
+  transform: translate3d(0,0,0);
+}
+
+.bg-blob.b1 { width: 520px; height: 520px; left: -10%; top: -8%; background: radial-gradient(circle at 30% 30%, rgba(196,30,58,0.18), rgba(196,30,58,0.06) 40%, transparent 60%); animation: move1 18s linear infinite; }
+.bg-blob.b2 { width: 420px; height: 420px; right: -8%; top: 10%; background: radial-gradient(circle at 70% 70%, rgba(122,162,255,0.14), rgba(122,162,255,0.04) 40%, transparent 60%); animation: move2 20s linear infinite; }
+.bg-blob.b3 { width: 720px; height: 720px; left: 10%; bottom: -20%; background: radial-gradient(circle at 40% 60%, rgba(214,54,82,0.08), rgba(214,54,82,0.02) 40%, transparent 60%); animation: move3 26s linear infinite; }
+.bg-blob.b4 { width: 360px; height: 360px; right: 20%; bottom: -6%; background: radial-gradient(circle at 60% 30%, rgba(58,196,160,0.08), rgba(58,196,160,0.02) 40%, transparent 60%); animation: move4 22s linear infinite; }
+
+@keyframes move1 {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(8vw,6vh,0) scale(1.05); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+@keyframes move2 {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(-6vw,-8vh,0) scale(1.08); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+@keyframes move3 {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(-10vw,5vh,0) scale(1.03); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+@keyframes move4 {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(6vw,-4vh,0) scale(1.06); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+
+/* gentle animated overlay gradient */
+.bg-anim::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.02), rgba(0,0,0,0.02), rgba(255,255,255,0.02));
+  mix-blend-mode: overlay;
+  opacity: 0.6;
+  animation: spin 60s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Dark mode color adjustments for blobs */
+body.dark .bg-blob.b1 { background: radial-gradient(circle at 30% 30%, rgba(122,162,255,0.12), rgba(122,162,255,0.04) 40%, transparent 60%); }
+body.dark .bg-blob.b2 { background: radial-gradient(circle at 70% 70%, rgba(214,54,82,0.10), rgba(214,54,82,0.02) 40%, transparent 60%); }
+body.dark .bg-blob.b3 { background: radial-gradient(circle at 40% 60%, rgba(96,255,200,0.08), rgba(96,255,200,0.02) 40%, transparent 60%); }
+body.dark .bg-blob.b4 { background: radial-gradient(circle at 60% 30%, rgba(255,180,120,0.06), rgba(255,180,120,0.02) 40%, transparent 60%); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-blob, .bg-anim::after { animation: none !important; transform: none !important; }
+}
+
 /* Dark-mode component overrides for better contrast and readability */
 body.dark .card,
 body.dark .project-card {
@@ -1060,60 +1126,4 @@ section.animate-in {
   .contact-info {
     grid-template-columns: 1fr;
   }
-}
-
-/* Animated page background (subtle, uses CSS variables and respects reduced-motion) */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  background: linear-gradient(120deg, rgba(196,30,58,0.06), rgba(122,162,255,0.06), rgba(45, 58, 95, 0.04));
-  background-size: 400% 400%;
-  opacity: 0.95;
-  filter: blur(40px);
-  transition: opacity 0.3s ease;
-  mix-blend-mode: normal;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-position: 0 0, 50px 50px;
-  background-size: 100px 100px, 120px 120px;
-  opacity: 0.7;
-  filter: blur(10px);
-  mix-blend-mode: overlay;
-}
-
-@keyframes bgGradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* animate the gradient subtlely, but reduce motion when user prefers reduced-motion */
-@media (prefers-reduced-motion: no-preference) {
-  body::before {
-    animation: bgGradientShift 24s linear infinite;
-  }
-  body::after {
-    animation: bgGradientShift 48s linear infinite reverse;
-  }
-}
-
-/* Dark-mode tuned colors */
-body.dark::before {
-  background: linear-gradient(120deg, rgba(122,162,255,0.06), rgba(122,162,255,0.03), rgba(10,18,34,0.12));
-  opacity: 0.9;
-}
-
-body.dark::after {
-  background-image: radial-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), radial-gradient(rgba(122,162,255,0.02) 1px, transparent 1px);
-  opacity: 0.55;
 }
