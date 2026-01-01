@@ -71,9 +71,20 @@ document.addEventListener('DOMContentLoaded', function () {
   // Contact form submit handler (simple UI feedback)
   var form = document.getElementById('contactForm');
   var submitMsg = document.getElementById('submitMessage');
+  // Send contact form contents to WhatsApp when submitted.
+  // NOTE: Assumes the provided local number (0701688606) is Sri Lanka. Convert leading 0 to country code 94 => 94701688606
+  var whatsappNumber = '94701688606';
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      var name = document.getElementById('name') ? document.getElementById('name').value.trim() : '';
+      var email = document.getElementById('email') ? document.getElementById('email').value.trim() : '';
+      var message = document.getElementById('message') ? document.getElementById('message').value.trim() : '';
+      var text = 'Name: ' + name + '\nEmail: ' + email + '\nMessage: ' + message;
+      var encoded = encodeURIComponent(text);
+      var waUrl = 'https://wa.me/' + whatsappNumber + '?text=' + encoded;
+      window.open(waUrl, '_blank', 'noopener');
+
       if (submitMsg) {
         submitMsg.style.display = 'block';
         setTimeout(function () {
