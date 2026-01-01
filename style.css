@@ -823,6 +823,53 @@ body.dark .card ul li::before {
   font-weight: 600;
 }
 
+.project-icon {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.project-card:hover .project-icon {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 8px 16px rgba(196, 30, 58, 0.3));
+}
+
+.ecg-wave {
+  animation: ecg-pulse 2s ease-in-out infinite;
+}
+
+.project-card:hover .ecg-wave {
+  animation: ecg-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes ecg-pulse {
+  0%, 100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.box-stack {
+  animation: stack-float 3s ease-in-out infinite;
+}
+
+.project-card:hover .box-stack {
+  animation: stack-float 1s ease-in-out infinite;
+}
+
+@keyframes stack-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
 .project-content {
   padding: 1.5rem;
 }
